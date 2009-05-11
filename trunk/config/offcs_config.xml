@@ -1,0 +1,153 @@
+<DiameterServerConfiguration>
+
+<HostName>diameter.advancedims.com</HostName>
+
+<HostIPAddress>127.0.0.1</HostIPAddress>
+
+<HostRealm>advancedims.com</HostRealm>
+
+<TcTimerVal>1234</TcTimerVal>
+
+<ProductName>Offline Charging Server</ProductName>
+
+<VendorID>776655</VendorID>
+
+<LogFileName>/root/diamlog.txt</LogFileName>
+
+<LogLevel>31</LogLevel>
+
+<Listeners>
+
+    <ListenerInfo>
+           <TransportType>TCP</TransportType>
+           <TransportDetails>
+               <IPAddress>127.0.0.1</IPAddress>
+               <Port>3868</Port>
+               <FQDN>diameter.advancedims.com</FQDN>
+               <IpAddrType>IPV4</IpAddrType>
+           </TransportDetails>
+    </ListenerInfo>
+
+</Listeners>
+
+<MiscModules>
+
+    <!--> Add any module infos here which are common to all applications in current server -->
+
+</MiscModules>
+
+
+<DatabaseModuleConfig>
+
+    <ModuleInfo>
+        <ModuleName>DBModule</ModuleName>
+        <ModuleFilePath>/AMPS_Modules/</ModuleFilePath>
+        <IsPathAbsolute>no</IsPathAbsolute>
+        <LoadModule>yes</LoadModule>
+    </ModuleInfo>
+
+     <DBMS_Configuration>
+         <HostName>127.0.0.1</HostName>
+         <UserName>root</UserName>
+         <Password>advims</Password>
+         <DatabaseName>adv_hss</DatabaseName>
+     </DBMS_Configuration>
+
+     
+
+</DatabaseModuleConfig>
+
+<DiameterApplication>
+
+    <ApplicationName>CDF</ApplicationName>
+
+
+    <CDRFileConfiguration>
+       <CdrsFileDirectoryName>CdrsLog</CdrsFileDirectoryName> <!-- Directory Name must be less or equal to 1023 characters long-->
+       <FileRotationType>CdrBasedRotation</FileRotationType> <!-- TimeBasedRotation or CdrBasedRotation -->
+       <MaxNumCdrsInOneFile>5000</MaxNumCdrsInOneFile> <!-- appliable only if number of CDR based Roation is set -->
+        <RotationTimerVlaue>1</RotationTimerVlaue> <!--Roitation timer value in minutes  -->
+        <UTCDifferentialSign>+</UTCDifferentialSign> <!-- + or - sign -->
+    	<UTCDifferentialHour>04</UTCDifferentialHour> <!-- must be two digit value -->
+        <UTCDifferentialMinute>30</UTCDifferentialMinute><!-- must be two digit value -->
+    </CDRFileConfiguration> 
+
+    <AppModules>
+
+        <ModuleInfo>
+            <ModuleName>RFModule</ModuleName>
+            <ModuleFilePath>/AMPS_Modules/</ModuleFilePath>
+            <IsPathAbsolute>no</IsPathAbsolute>
+            <LoadModule>yes</LoadModule>
+        </ModuleInfo>
+
+        <ModuleInfo>
+            <ModuleName>CdrFileWriterModule</ModuleName>
+            <ModuleFilePath>/AMPS_Modules/</ModuleFilePath>
+            <IsPathAbsolute>no</IsPathAbsolute>
+            <LoadModule>yes</LoadModule>
+        </ModuleInfo>
+
+
+        <ModuleInfo>
+            <ModuleName>CGF</ModuleName>
+            <ModuleFilePath>/AMPS_Modules/</ModuleFilePath>
+            <IsPathAbsolute>no</IsPathAbsolute>
+            <LoadModule>yes</LoadModule>
+        </ModuleInfo>
+
+
+    </AppModules>
+
+   
+    <DiameterStackParams>
+
+        <ApplicationInfo>
+            <ApplicationID>3</ApplicationID>
+            <ApplicationType>Accounting</ApplicationType>
+        </ApplicationInfo>
+
+         <DictionaryFile>
+            <FilePathAndName>offline_cs_dictionary.xml</FilePathAndName>
+            <IsPathAbsolute>no</IsPathAbsolute>
+        </DictionaryFile>
+    
+        <PeerTableEntries>
+    
+            <PeerInfo>
+                <HostIdentity>seagull.ims.hpintelco.org</HostIdentity>
+                <Role>initiator</Role>
+                <IPAddress>127.0.0.1</IPAddress>
+                <Port>3869</Port>
+                <WatchDogSupport>no</WatchDogSupport>
+            </PeerInfo>
+
+            <PeerInfo>
+                <HostIdentity>seagull1.ims.hpintelco.org</HostIdentity>
+                <Role>initiator</Role>
+                <IPAddress>127.0.0.1</IPAddress>
+                <Port>3869</Port>
+                <WatchDogSupport>no</WatchDogSupport>
+            </PeerInfo>
+
+        </PeerTableEntries>
+    
+        <RealmTableEntries>
+    
+            <RealmInfo>
+                <RealmName>ims.hpintelco.org</RealmName>
+                <ApplicationID>3</ApplicationID>
+                <LocalAction>local</LocalAction>
+            </RealmInfo>
+    
+        </RealmTableEntries>
+
+        
+
+    </DiameterStackParams>
+
+    
+</DiameterApplication>
+
+
+</DiameterServerConfiguration>
