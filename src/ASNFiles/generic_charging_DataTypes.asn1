@@ -1,0 +1,247 @@
+GenericChargingDataTypes {itu-t (0) identified-organization (4) etsi(0) mobileDomain (0) charging (5) genericChargingDataTypes (0) asn1Module (0) version1 (0)}  
+
+DEFINITIONS IMPLICIT TAGS	::=
+
+BEGIN
+
+
+
+
+------------------------------------------------------------------------------
+--
+--  Generic Data Types
+--
+------------------------------------------------------------------------------
+
+
+
+
+RecordType 	::= INTEGER 
+{ 
+
+--	Record values 0..17 are CS specific.
+--	The contents are defined in TS 32.250 [10]
+
+	moCallRecord		(0),
+	mtCallRecord		(1),
+	roamingRecord		(2),
+	incGatewayRecord	(3),
+	outGatewayRecord	(4),
+	transitCallRecord	(5),
+	moSMSRecord			(6),
+	mtSMSRecord			(7),
+	moSMSIWRecord		(8),
+	mtSMSGWRecord		(9),
+	ssActionRecord		(10),
+	hlrIntRecord		(11),
+	locUpdateHLRRecord	(12),
+	locUpdateVLRRecord	(13),
+	commonEquipRecord	(14),
+	moTraceRecord		(15),	--- used in earlier releases
+	mtTraceRecord		(16),	--- used in earlier releases
+	termCAMELRecord	    (17),
+--
+--	Record values 18..22 are GPRS specific.
+--	The contents are defined in TS 32.251 [11]
+--
+	sgsnPDPRecord		(18),
+	ggsnPDPRecord		(19),
+	sgsnMMRecord		(20),
+	sgsnSMORecord		(21),
+	sgsnSMTRecord		(22),
+-- 
+--  Record values 23..25 are CS-LCS specific.
+--	The contents are defined in TS 32.250 [10]
+--
+	mtLCSRecord			(23),
+	moLCSRecord			(24),
+	niLCSRecord			(25),
+-- 
+--  Record values 26..28 are GPRS-LCS specific.
+--	The contents are defined in TS 32.251 [11]
+--
+	sgsnMtLCSRecord		(26),
+    sgsnMoLCSRecord		(27),
+    sgsnNiLCSRecord		(28),
+--
+--  Record values 30..62 are MMS specific.
+--  The contents are defined in TS 32.270 [30]
+--
+	mMO1SRecord			(30),
+	mMO4FRqRecord		(31),
+	mMO4FRsRecord		(32),
+	mMO4DRecord			(33), 
+	mMO1DRecord			(34),
+	mMO4RRecord			(35), 
+	mMO1RRecord			(36),
+	mMOMDRecord			(37), 
+	mMR4FRecord			(38), 
+	mMR1NRqRecord		(39), 
+	mMR1NRsRecord		(40), 
+	mMR1RtRecord		(41), 
+	mMR1AFRecord		(42), 
+	mMR4DRqRecord		(43), 
+	mMR4DRsRecord		(44), 
+	mMR1RRRecord		(45), 
+	mMR4RRqRecord		(46), 
+	mMR4RRsRecord		(47), 
+	mMRMDRecord			(48),
+	mMFRecord			(49),
+	mMBx1SRecord		(50),
+	mMBx1VRecord		(51),
+	mMBx1URecord		(52),
+	mMBx1DRecord		(53),
+	mM7SRecord			(54),
+	mM7DRqRecord		(55),
+	mM7DRsRecord		(56),
+	mM7CRecord			(57),
+	mM7RRecord			(58),
+	mM7DRRqRecord		(59),
+	mM7DRRsRecord		(60),
+	mM7RRqRecord		(61),
+	mM7RRsRecord		(62),
+--
+--  Record values 63..69, 82 are IMS specific.
+--  The contents are defined in TS 32.260 [20]
+--
+	sCSCFRecord			(63),
+	pCSCFRecord			(64),
+	iCSCFRecord			(65),
+	mRFCRecord			(66),
+	mGCFRecord			(67),
+	bGCFRecord			(68),
+	aSRecord			(69),
+	iBCFRecord			(82),
+--
+--  Record values 70 is for Flow based Charging
+--  The contents are defined in TS 32.251 [11]
+--
+	egsnPDPRecord		(70),
+--
+--  Record values 71..75 are LCS specific.
+--  The contents are defined in TS 32.271 [31]
+--
+	lCSGMORecord		(71),
+	lCSRGMTRecord		(72),
+	lCSHGMTRecord		(73),
+	lCSVGMTRecord		(74),
+	lCSGNIRecord		(75),
+--
+--  Record values 76..79 are MBMS specific.
+--  The contents are defined in TS 32.251 [11]
+--  Record values 76 and 77 are MBMS bearer context specific
+--
+	sgsnMBMSRecord		(76),
+	ggsnMBMSRecord		(77),
+--
+--  And TS 32.273 [33]
+--  Record values 78 and 79 are MBMS service specific
+--  and defined in TS 32.273 [33]
+--
+	sUBBMSCRecord		(78),
+	cONTENTBMSCRecord	(79),
+--
+--  Record Values 80..81 are PoC specific.
+--  The contents are defined in TS 32.272 [32]
+--
+	pPFRecord			(80),
+	cPFRecord			(81)
+}
+
+
+
+IPAddress	::= CHOICE
+{
+	iPBinaryAddress	 IPBinaryAddress,
+	iPTextRepresentedAddress	 IPTextRepresentedAddress
+}
+
+IPBinaryAddress	::= CHOICE
+{
+	iPBinV4Address			[0] OCTET STRING (SIZE(4)),
+	iPBinV6Address			[1] OCTET STRING (SIZE(16))
+}
+
+IPTextRepresentedAddress	::= CHOICE
+{	
+	--
+	-- IP address in the familiar "dot" notation
+	--
+	iPTextV4Address			[2] IA5String (SIZE(7..15)),
+	iPTextV6Address			[3] IA5String (SIZE(15..45))
+}
+
+
+LocalSequenceNumber ::= INTEGER (0..4294967295)
+	--
+	-- Sequence number of the record in this node
+	-- 0.. 4294967295 is equivalent to 0..2**32-1, unsigned integer in four octets
+
+
+	
+
+-- close it temporarly ManagementExtensions	::= SET OF ManagementExtension
+
+
+NodeAddress ::= CHOICE 
+{
+	iPAddress 	[0] IPAddress,
+	domainName	[1] UniversalString
+}
+
+ServiceContextID		::= UTF8String
+
+
+ServiceSpecificInfo  ::=  SEQUENCE
+{
+	
+	serviceSpecificData	[0] UniversalString OPTIONAL, 
+	serviceSpecificType	[1] INTEGER OPTIONAL
+}
+
+
+
+
+TimeStamp					::= OCTET STRING (SIZE(9))
+	--
+	-- The contents of this field are a compact form of the UTCTime format
+	-- containing local time plus an offset to universal time. Binary coded
+	-- decimal encoding is employed for the digits to reduce the storage and
+	-- transmission overhead
+	-- e.g. YYMMDDhhmmssShhmm
+	-- where
+	-- YY 	= 	Year 00 to 99		BCD encoded
+	-- MM 	= 	Month 01 to 12 		BCD encoded
+	-- DD	=	Day 01 to 31		BCD encoded
+	-- hh	=	hour 00 to 23		BCD encoded
+	-- mm	=	minute 00 to 59		BCD encoded
+	-- ss	=	second 00 to 59		BCD encoded
+	-- S	=	Sign 0 = "+", "-"	ASCII encoded
+	-- hh	=	hour 00 to 23		BCD encoded
+	-- mm	=	minute 00 to 59		BCD encoded
+	
+SubscriptionIDType  ::= ENUMERATED
+{
+	endUserE164	(0),
+	endUserIMSI 	(1),
+	endUserSIPURI   (2),
+	endUserNAI      (3),
+	endUserPRIVATE 	(4)
+
+	 --END_USER_E164	(0),
+	 --END_USER_IMSI	(1),
+	 --END_USER_SIP_URI	(2),
+	 --END_USER_NAI		(3),
+	 --END_USER_PRIVATE	(4)
+}
+
+
+SubscriptionID	::= SET
+{
+	subscriptionIDType	[0]	SubscriptionIDType,
+	subscriptionIDData	[1]	UTF8String
+}
+
+
+
+END
