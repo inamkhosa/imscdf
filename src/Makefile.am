@@ -4,9 +4,9 @@ bin_PROGRAMS = offlinecharging
 
 offlinecharging_SOURCES = offline_charging_server.h offline_charging_server.c 
 
-INCLUDES = -I. -I$(top_srcdir)/src/rf_app $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) $(LIBXML_DEPS_CFLAGS) $(LIBAMPS_DEPS_CFLAGS)
+INCLUDES = -I. -I$(top_srcdir)/src/rf_app $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) -I$(top_srcdir)/include/amps -I$(top_srcdir)/include/libxml2
 
-LDADD = $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) $(LIBXML_DEPS_LIBS) $(LIBAMPS_DEPS_LIBS) -lASNModule -L$(top_srcdir)/src/ASNFiles/
+LDADD = $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) -L/usr/local/lib -lxml2 -lamps -lASNModule -L$(top_srcdir)/src/ASNFiles/
 
 AM_CFLAGS = -DDATADIR=\"$(datadir)/@PACKAGE@/\" -DLIBDIR=\"$(libdir)/\"
 

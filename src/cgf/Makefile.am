@@ -4,9 +4,9 @@ h_sources = CGF.h
 
 c_sources = CGF.c
 
-INCLUDES = -I. -I$(top_srcdir)/src -I$(top_srcdir)/src/rf_app -I$(top_srcdir)/src/db_module -I$(top_srcdir)/src/cdr_filewriter -I$(top_srcdir)/src/ASNFiles $(LIBXML_DEPS_CFLAGS) $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) $(LIBAMPS_DEPS_CFLAGS)
+INCLUDES = -I. -I$(top_srcdir)/src -I$(top_srcdir)/src/rf_app -I$(top_srcdir)/src/db_module -I$(top_srcdir)/src/cdr_filewriter -I$(top_srcdir)/src/ASNFiles $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) -I$(top_srcdir)/include/amps -I$(top_srcdir)/include/libxml2
 
-LDADD = -lASNModule -L$(top_srcdir)/src/ASNFiles/ $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) $(LIBXML_DEPS_LIBS) 
+LDADD = -lASNModule -L$(top_srcdir)/src/ASNFiles/ $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) -L/usr/local/lib -lxml2 -lamps 
 
 AM_CFLAGS = -DDATADIR=\"$(datadir)/@PACKAGE@/\" -DLIBDIR=\"$(libdir)/\"
 

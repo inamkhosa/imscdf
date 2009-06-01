@@ -4,9 +4,9 @@ h_sources = AccessCorrelationID.h ACRInterimLost.h ApplicationServersInformation
 
 c_sources = AccessCorrelationID.c ACRInterimLost.c ApplicationServersInformation.c asn_codecs_prim.c asn_SEQUENCE_OF.c asn_SET_OF.c ASRecord.c ber_decoder.c ber_tlv_length.c ber_tlv_tag.c BGCFRecord.c BIT_STRING.c BOOLEAN.c CarrierSelectRouting.c CauseForRecordClosing.c constraints.c constr_CHOICE.c constr_SEQUENCE.c constr_SEQUENCE_OF.c constr_SET.c constr_SET_OF.c constr_TYPE.c der_encoder.c Early-Media-Components-List.c IA5String.c  ICSCFRecord.c IMS-Charging-Identifier.c IMSCommunicationServiceIdentifier.c IMSRecord.c Incomplete-CDR-Indication.c INTEGER.c InterOperatorIdentifierlist.c InterOperatorIdentifiers.c InvolvedParty.c IPAddress.c IPBinaryAddress.c IPTextRepresentedAddress.c ListOfInvolvedParties.c LocalSequenceNumber.c Media-Components-List.c MessageBody.c MGCFRecord.c MRFCRecord.c NativeEnumerated.c NativeInteger.c NodeAddress.c NULL.c NumberPortabilityRouting.c OCTET_STRING.c PCSCFRecord.c per_decoder.c  per_encoder.c per_support.c RecordType.c Role-of-Node.c S-CSCF-Information.c SCSCFRecord.c SDP-Media-Component.c SDP-Media-Description.c ServedPartyIPAddress.c ServiceContextID.c Service-Id.c ServiceSpecificInfo.c Session-Id.c SIP-Method.c SubscriptionID.c SubscriptionIDType.c TimeStamp.c  TransmissionMedium.c TrunkGroupID.c UniversalString.c UTF8String.c xer_decoder.c xer_encoder.c xer_support.c
 
-INCLUDES = -I. -I$(top_srcdir)/src -I$(top_srcdir)/src/db_module -I$(top_srcdir)/src/cdr_filewriter $(LIBXML_DEPS_CFLAGS) $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) $(LIBAMPS_DEPS_CFLAGS)
+INCLUDES = -I. -I$(top_srcdir)/src -I$(top_srcdir)/src/db_module -I$(top_srcdir)/src/cdr_filewriter $(DIAMETER_DEPS_CFLAGS) $(DIAMAPPCOMMON_DEPS_CFLAGS) -I$(top_srcdir)/include/amps -I$(top_srcdir)/include/libxml2
 
-LDADD = $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) $(LIBXML_DEPS_LIBS)
+LDADD = $(DIAMETER_DEPS_LIBS) $(DIAMAPPCOMMON_DEPS_LIBS) -L/usr/local/lib -lxml2 -lamps
 
 AM_CFLAGS = -DDATADIR=\"$(datadir)/@PACKAGE@/\" -DLIBDIR=\"$(libdir)/\"
 
